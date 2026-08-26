@@ -104,6 +104,17 @@ section{padding:105px 0}.section-head{max-width:760px;margin-bottom:48px}.kicker
 .hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
 .consent{display:flex;gap:9px;align-items:flex-start;max-width:620px;margin-top:14px;color:#8d9aa2;font-size:.78rem;line-height:1.5;cursor:pointer}
 .consent input{accent-color:var(--green);margin-top:3px;flex:none}.consent a{color:var(--green);text-decoration:underline}
+.gate-overlay{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:20px;background:rgba(3,5,7,.82);backdrop-filter:blur(6px)}
+.gate-overlay.open{display:flex}
+.gate-box{position:relative;width:min(460px,100%);background:linear-gradient(160deg,#0b1015,#0e151c);border:1px solid var(--line);border-radius:16px;padding:36px 30px 30px;box-shadow:var(--shadow)}
+.gate-box .kicker{margin-bottom:10px}
+.gate-box h3{font-size:1.35rem;line-height:1.2;letter-spacing:-.02em;margin-bottom:10px}
+.gate-box>p{color:var(--muted);font-size:.92rem;margin-bottom:22px}
+.gate-box .formbox{flex-direction:column;max-width:none;margin-top:0}
+.gate-box .consent{max-width:none}
+.gate-close{position:absolute;top:14px;right:16px;width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#8b98a0;font-size:1.2rem;cursor:pointer;line-height:1}
+.gate-close:hover{color:var(--text);border-color:var(--line)}
+body.gate-lock{overflow:hidden}
 button[disabled]{opacity:.55;pointer-events:none}
 details{border-bottom:1px solid rgba(255,255,255,.08);padding:20px 0}summary{cursor:pointer;font-weight:700}details p{color:var(--muted);padding-top:12px;max-width:800px}
 footer{border-top:1px solid rgba(255,255,255,.07);padding:45px 0;color:#6f7c83;font-size:.78rem}.footer{display:flex;justify-content:space-between;gap:25px}.footer a:hover{color:var(--green)}
@@ -127,7 +138,7 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:45px 0;color:#6f7c83;f
     <h1>O primeiro <em>livro-jogo</em> de programação em Java. 8 episódios. Uma investigação que só avança com <em>o seu código</em>.</h1>
     <p>Um programador chamado Ricardo desaparece sem deixar rastros — só um notebook ligado e um caso pela metade. Para reconstruir o que aconteceu, você escreve, compila e executa código Java de verdade. Cada conceito é ensinado antes de você precisar dele, e é o resultado do seu programa que decide para onde a investigação vai.</p>
     <p class="tagline">Você não vai só ler o mistério.<br>Você vai programá-lo.<br>E o Episódio 1 é grátis.</p>
-    <div class="actions"><a class="btn btn-primary" href="https://drive.google.com/file/d/1aYkTmWwyKVuAYKzPd36PtMZ0-KGfe0SF/view?usp=sharing" target="_blank" rel="noopener">COMEÇAR EPISÓDIO 1 GRÁTIS →</a><a class="btn btn-secondary" href="#episodios">VER OS 8 EPISÓDIOS</a></div>
+    <div class="actions"><a class="btn btn-primary js-gate" href="javascript:void(0)">COMEÇAR EPISÓDIO 1 GRÁTIS →</a><a class="btn btn-secondary" href="#episodios">VER OS 8 EPISÓDIOS</a></div>
   </div>
   <div class="terminal reveal">
     <div class="termbar"><i></i><i></i><i></i><span class="term-title">investigacao@notebook:~/silencio</span></div>
@@ -259,7 +270,7 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:45px 0;color:#6f7c83;f
 <section id="episodios"><div class="container">
   <div class="section-head reveal"><div class="kicker">A série</div><h2>8 episódios. Uma investigação. Comece agora, de graça.</h2><p>O Episódio 1 é 100% grátis. Os episódios 2 a 8 estão prontos e liberados na compra, avulso ou no pacote completo.</p></div>
   <div class="episodes">
-    <div class="episode available reveal"><span>EPISÓDIO 01</span><h3>O Notebook</h3><div class="status">✓ Grátis · comece agora</div><a class="mini" href="https://drive.google.com/file/d/1aYkTmWwyKVuAYKzPd36PtMZ0-KGfe0SF/view?usp=sharing" target="_blank" rel="noopener">Ler agora →</a></div>
+    <div class="episode available reveal"><span>EPISÓDIO 01</span><h3>O Notebook</h3><div class="status">✓ Grátis · comece agora</div><a class="mini js-gate" href="javascript:void(0)">Ler agora →</a></div>
     <div class="episode reveal"><span>EPISÓDIO 02</span><h3>O Cofre</h3><div class="status locked">Disponível na compra</div><a class="mini" href="#comprar">Desbloquear →</a></div>
     <div class="episode reveal"><span>EPISÓDIO 03</span><h3>A Organização</h3><div class="status locked">Incluso no pacote</div><a class="mini" href="#comprar">Desbloquear →</a></div>
     <div class="episode reveal"><span>EPISÓDIO 04</span><h3>A Sala dos Espelhos</h3><div class="status locked">Incluso no pacote</div><a class="mini" href="#comprar">Desbloquear →</a></div>
@@ -298,7 +309,7 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:45px 0;color:#6f7c83;f
       <span>EPISÓDIO 01</span><h4>O Notebook</h4>
       <p class="blearn">Primeiro programa em Java: variáveis, tipos e saída no terminal.</p>
       <div class="bprice">Grátis</div>
-      <a class="btn btn-secondary" href="https://drive.google.com/file/d/1aYkTmWwyKVuAYKzPd36PtMZ0-KGfe0SF/view?usp=sharing" target="_blank" rel="noopener">LER AGORA</a>
+      <a class="btn btn-secondary js-gate" href="javascript:void(0)">LER AGORA</a>
     </div>
     <div class="buycard">
       <span>EPISÓDIO 02</span><h4>O Cofre</h4>
@@ -391,6 +402,29 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:45px 0;color:#6f7c83;f
 
 <footer id="privacidade"><div class="container footer"><div><strong style="color:#b9c4c9">O Código do Silêncio</strong><br>© 2026. Todos os direitos reservados.</div><div><a href="#">Início</a> · <a href="#episodio">Recapitulando</a> · <a href="#episodios">Episódios</a> · <a href="#faq">FAQ</a> · <a href="politica-de-privacidade.html">Política de Privacidade</a></div></div></footer>
 
+<div class="gate-overlay" id="gateOverlay" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+  <div class="gate-box">
+    <button type="button" class="gate-close" id="gateClose" aria-label="Fechar">×</button>
+    <div class="kicker">Episódio 1 · O Notebook</div>
+    <h3 id="gateTitle">Para onde enviamos o seu acesso?</h3>
+    <p>Informe seu e-mail para liberar o Episódio 1 agora. É grátis, leva 10 segundos e você pode cancelar o recebimento quando quiser.</p>
+    <form class="formbox" id="gateForm" novalidate>
+      <input id="gateName" name="nome" type="text" placeholder="Seu nome" autocomplete="name" required>
+      <input id="gateEmail" name="email" type="email" placeholder="Seu melhor e-mail" autocomplete="email" required>
+      <!-- honeypot anti-spam: invisível para pessoas, atrativo para bots -->
+      <input id="gateWebsite" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+      <button class="btn btn-primary" id="gateBtn" type="submit">LIBERAR EPISÓDIO 1 →</button>
+    </form>
+    <label class="consent">
+      <input id="gateConsent" type="checkbox" required>
+      <span>Autorizo o armazenamento do meu nome e e-mail e o envio de comunicações sobre a série
+      "O Código do Silêncio", conforme a
+      <a href="politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+    </label>
+    <div class="formmsg" id="gateMsg" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
 <script>
 /* ================================
    CONFIGURAÇÃO
@@ -477,6 +511,105 @@ form.addEventListener("submit", async function(e){
     }
   }finally{
     leadBtn.disabled = false;
+  }
+});
+
+/* ---------- Modal de acesso ao Episódio 1 (e-mail antes do download) ---------- */
+const DRIVE_URL   = "https://drive.google.com/file/d/1aYkTmWwyKVuAYKzPd36PtMZ0-KGfe0SF/view?usp=sharing";
+const THANKS_URL  = "obrigado.html";
+
+const gateOverlay = document.getElementById("gateOverlay");
+const gateForm    = document.getElementById("gateForm");
+const gateMsg     = document.getElementById("gateMsg");
+const gateBtn     = document.getElementById("gateBtn");
+const gateClose   = document.getElementById("gateClose");
+
+function openGate(){
+  gateOverlay.classList.add("open");
+  document.body.classList.add("gate-lock");
+  gateMsg.textContent = "";
+  gateMsg.classList.remove("err");
+  setTimeout(()=>document.getElementById("gateName").focus(), 50);
+}
+function closeGate(){
+  gateOverlay.classList.remove("open");
+  document.body.classList.remove("gate-lock");
+}
+
+document.querySelectorAll(".js-gate").forEach(el=>{
+  el.addEventListener("click", function(e){ e.preventDefault(); openGate(); });
+});
+gateClose.addEventListener("click", closeGate);
+gateOverlay.addEventListener("click", function(e){ if(e.target === gateOverlay) closeGate(); });
+document.addEventListener("keydown", function(e){ if(e.key === "Escape" && gateOverlay.classList.contains("open")) closeGate(); });
+
+function setGateMsg(text, isError){
+  gateMsg.textContent = text;
+  gateMsg.classList.toggle("err", !!isError);
+}
+
+gateForm.addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const nome    = document.getElementById("gateName").value.trim();
+  const email   = document.getElementById("gateEmail").value.trim();
+  const consent = document.getElementById("gateConsent").checked;
+  const website = document.getElementById("gateWebsite").value;
+
+  if(!nome){                 setGateMsg("Informe seu nome.", true); return; }
+  if(!EMAIL_RE.test(email)){ setGateMsg("Informe um e-mail válido.", true); return; }
+  if(!consent){              setGateMsg("É necessário aceitar a Política de Privacidade.", true); return; }
+  if(website){               return; }  // bot: descarta em silêncio
+
+  const qs = new URLSearchParams(location.search);
+  const dados = new URLSearchParams({
+    token:         LEAD_TOKEN,
+    nome:          nome,
+    email:         email,
+    website:       website,
+    consentimento: "true",
+    origem:        location.href + " | gate-episodio-1",
+    utm_source:    qs.get("utm_source")   || "",
+    utm_medium:    qs.get("utm_medium")   || "",
+    utm_campaign:  qs.get("utm_campaign") || "episodio1-gratis",
+    user_agent:    navigator.userAgent
+  });
+
+  gateBtn.disabled = true;
+  setGateMsg("Enviando...", false);
+
+  function goToThanks(){
+    try{
+      sessionStorage.setItem("ocs_drive_url", DRIVE_URL);
+      sessionStorage.setItem("ocs_nome", nome);
+    }catch(err){ /* sessionStorage indisponível: segue sem personalização */ }
+    location.href = THANKS_URL + "?d=" + encodeURIComponent(DRIVE_URL);
+  }
+
+  try{
+    const resp = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: dados.toString(),
+      redirect: "follow"
+    });
+    const out = await resp.json();
+    if(out.status !== "ok") throw new Error(out.message || "falha");
+    goToThanks();
+  }catch(err){
+    /* Plano B: envio sem leitura de resposta (opaco), caso o CORS falhe. */
+    try{
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: dados.toString()
+      });
+      goToThanks();
+    }catch(err2){
+      setGateMsg("Não foi possível enviar agora. Tente novamente em instantes.", true);
+      gateBtn.disabled = false;
+    }
   }
 });
 
