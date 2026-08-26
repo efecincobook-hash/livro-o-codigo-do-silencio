@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="O primeiro livro-jogo de programação em Java. 8 episódios. Uma investigação que só avança com o seu código. Episódio 1 grátis.">
+<meta property="og:title" content="O Código do Silêncio — Episódio 1 grátis">
+<meta property="og:description" content="Uma investigação que só avança com o seu código. Comece grátis pelo Episódio 1.">
+<meta property="og:type" content="website">
+<title>Episódio 1 grátis — O Código do Silêncio</title>
+
+<!-- ============================================================
+  META PIXEL — troque PIXEL_ID_AQUI pelo ID real (Gerenciador de
+  Eventos do Meta). Sem isso, esta página não gera público de
+  retargeting nem otimiza a campanha de conversão.
+============================================================= -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'PIXEL_ID_AQUI');
+fbq('track', 'PageView');
+</script>
+
+<style>
+/* ===== Design system copiado do index.html original (mesmas variáveis) ===== */
+:root{
+  --bg:#05070a;--panel:#0b1015;--panel2:#0e151c;--text:#eef3f5;--muted:#91a0aa;
+  --green:#58f39b;--green2:#21c875;--line:rgba(88,243,155,.18);--red:#ff5d69;
+  --max:760px;--shadow:0 20px 70px rgba(0,0,0,.45)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:
+radial-gradient(circle at 80% 10%,rgba(26,111,75,.12),transparent 28rem),
+radial-gradient(circle at 10% 35%,rgba(30,68,110,.12),transparent 30rem),var(--bg);
+color:var(--text);line-height:1.65;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:45px 45px}
+a{color:inherit;text-decoration:none}
+.container{width:min(calc(100% - 40px),var(--max));margin:auto}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(5,7,10,.76);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav{height:64px;display:flex;align-items:center;justify-content:center}
+.logo{font-weight:800;letter-spacing:.08em;font-size:.84rem}
+.logo span{color:var(--green)}
+
+.hero{min-height:100vh;padding:130px 0 60px;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--green);font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:22px}
+.dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 16px var(--green);animation:pulse 1.8s infinite}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);line-height:1.05;letter-spacing:-.04em}
+h1 em{font-style:normal;color:var(--green)}
+.hero p{font-size:1.05rem;color:#aeb9bf;max-width:620px;margin:22px 0}
+.tagline{font-size:1.02rem;color:#fff!important;font-weight:700;line-height:1.5;border-left:2px solid var(--green);padding-left:16px;margin-bottom:30px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:15px 22px;border-radius:9px;font-weight:800;font-size:.88rem;letter-spacing:.02em;transition:.25s;cursor:pointer;border:none;font-family:inherit}
+.btn-primary{background:var(--green);color:#031009;box-shadow:0 0 35px rgba(88,243,155,.14)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 45px rgba(88,243,155,.28)}
+.btn-primary:disabled{opacity:.55;pointer-events:none;transform:none}
+
+.terminal{background:#070b0e;border:1px solid rgba(255,255,255,.1);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:34px}
+.termbar{height:42px;background:#11171c;display:flex;align-items:center;gap:7px;padding:0 15px;border-bottom:1px solid rgba(255,255,255,.06)}
+.termbar i{width:9px;height:9px;border-radius:50%;background:#44515a}
+.term-title{margin-left:8px;color:#69777f;font:12px ui-monospace,SFMono-Regular,monospace}
+.term-body{padding:24px;font:14px/1.9 ui-monospace,SFMono-Regular,Menlo,monospace;color:#9eb0b8}
+.term-body .g{color:var(--green)}.term-body .w{color:#e9eff1}.term-body .dim{color:#65747d}
+.term-body .cursor{display:inline-block;width:8px;height:16px;background:var(--green);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+.badge{display:inline-block;margin-top:20px;padding:6px 10px;border:1px solid var(--line);border-radius:999px;color:var(--green);font-size:.68rem;letter-spacing:.1em;font-weight:800}
+
+section.points{padding:30px 0 60px}
+.kicker{color:var(--green);font-size:.7rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.ilist{list-style:none;display:grid;gap:14px;margin-top:6px}
+.ilist li{padding-left:26px;position:relative;color:#c3cdd1;font-size:.95rem;line-height:1.55}
+.ilist li:before{content:"✓";color:var(--green);position:absolute;left:0;font-weight:800}
+.ilist b{color:var(--text)}
+
+.upsell{border:1px solid var(--line);border-radius:16px;background:linear-gradient(140deg,rgba(88,243,155,.05),rgba(255,255,255,.015));padding:30px;margin:10px 0 60px}
+.upsell .kicker{color:var(--green)}
+.upsell p{color:var(--muted);font-size:.92rem;margin:10px 0 18px}
+
+footer{border-top:1px solid rgba(255,255,255,.07);padding:34px 0 50px;color:#6f7c83;font-size:.78rem;text-align:center}
+footer a:hover{color:var(--green)}
+
+/* ===== Gate modal — mesmo componente e mesma lógica do index.html ===== */
+.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.formbox{display:flex;flex-direction:column;gap:10px;margin-top:0}
+.formbox input{background:#080d11;border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:8px;padding:14px;font-family:inherit;font-size:.95rem}
+.formbox input:focus{outline:1px solid var(--green);border-color:var(--green)}
+.formmsg{font-size:.78rem;color:var(--green);margin-top:10px;min-height:20px}
+.formmsg.err{color:var(--red)}
+.consent{display:flex;gap:9px;align-items:flex-start;margin-top:14px;color:#8d9aa2;font-size:.78rem;line-height:1.5;cursor:pointer}
+.consent input{accent-color:var(--green);margin-top:3px;flex:none}
+.consent a{color:var(--green);text-decoration:underline}
+
+.gate-overlay{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:20px;background:rgba(3,5,7,.82);backdrop-filter:blur(6px)}
+.gate-overlay.open{display:flex}
+.gate-box{position:relative;width:min(460px,100%);background:linear-gradient(160deg,#0b1015,#0e151c);border:1px solid var(--line);border-radius:16px;padding:36px 30px 30px;box-shadow:var(--shadow)}
+.gate-box .kicker{margin-bottom:10px}
+.gate-box h3{font-size:1.35rem;line-height:1.2;letter-spacing:-.02em;margin-bottom:10px}
+.gate-box>p{color:var(--muted);font-size:.92rem;margin-bottom:22px}
+.gate-close{position:absolute;top:14px;right:16px;width:32px;height:32px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:transparent;color:#8b98a0;font-size:1.2rem;cursor:pointer;line-height:1}
+.gate-close:hover{color:var(--text);border-color:var(--line)}
+body.gate-lock{overflow:hidden}
+button[disabled]{opacity:.55;pointer-events:none}
+
+@keyframes pulse{50%{opacity:.45;box-shadow:0 0 4px var(--green)}}
+@keyframes blink{50%{opacity:0}}
+
+@media(max-width:560px){
+  .hero{padding-top:105px}
+  .hero p{font-size:1rem}
+  .btn{width:100%}
+  .term-body{font-size:12px;padding:18px}
+}
+</style>
+</head>
+<body>
+
+<nav><div class="container nav">
+  <a class="logo" href="#">O CÓDIGO <span>DO SILÊNCIO</span></a>
+</div></nav>
+
+<main>
+<section class="hero container">
+  <div class="eyebrow"><i class="dot"></i> Nenhuma experiência com programação exigida</div>
+  <h1>Um notebook ligado. Um programador desaparecido. <em>O primeiro código é seu.</em></h1>
+  <p>Ricardo desaparece sem deixar rastros — só um notebook ligado e um caso pela metade. Para reconstruir o que aconteceu, você escreve, compila e executa código Java de verdade. Cada conceito é ensinado antes de você precisar dele.</p>
+  <p class="tagline">Você não vai só ler o mistério.<br>Você vai programá-lo.<br>E o Episódio 1 é grátis.</p>
+
+  <div class="terminal">
+    <div class="termbar"><i></i><i></i><i></i><span class="term-title">investigacao@notebook:~/silencio</span></div>
+    <div class="term-body">
+      <div class="dim">user@notebook:~$ java Investigacao --iniciar</div>
+      <div class="w">Carregando caso...</div><br>
+      <div class="g">Desaparecimento: Ricardo Alves</div>
+      <div class="w">Arquivo 01 — O Notebook <span class="g">[GRÁTIS]</span></div><br>
+      <div class="g">[ SISTEMA ]</div>
+      <div class="dim">Nenhuma experiência prévia necessária. Escreva seu primeiro código Java para abrir o arquivo.</div><br>
+      <span class="g">user@notebook:~$ </span><span class="cursor"></span>
+      <div class="badge">EPISÓDIO 1 · ACESSO IMEDIATO</div>
+    </div>
+  </div>
+
+  <a class="btn btn-primary js-gate" href="javascript:void(0)">COMEÇAR EPISÓDIO 1 GRÁTIS →</a>
+</section>
+
+<section class="points container">
+  <div class="kicker">O que tem no Arquivo 01</div>
+  <ul class="ilist">
+    <li><b>Sem curso, sem aula chata</b> — você lê a cena, escreve o código, executa, e o resultado abre o próximo trecho da história.</li>
+    <li><b>Java do zero absoluto</b> — variáveis, tipos e saída no terminal, ensinados no momento exato em que você precisa deles.</li>
+    <li><b>A investigação continua</b> nos Episódios 2 a 8, com classes, arrays, herança, exceções e mais — cada um destravando uma parte nova do caso.</li>
+  </ul>
+</section>
+
+<section class="container">
+  <div class="upsell">
+    <div class="kicker">Depois do arquivo 01</div>
+    <p>Ricardo deixou rastros em outros 7 lugares. O pacote completo (Episódios 2 a 8) já está pronto, sem espera — por R$67,00.</p>
+    <a class="btn btn-primary" href="https://efecincobook-hash.github.io/livro-o-codigo-do-silencio/#comprar">VER O PACOTE COMPLETO →</a>
+  </div>
+</section>
+</main>
+
+<footer><div class="container">
+  O Código do Silêncio © 2026. <a href="https://efecincobook-hash.github.io/livro-o-codigo-do-silencio/politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>
+</div></footer>
+
+<!-- ===== Gate: mesmo modal e mesmo texto de consentimento do site original ===== -->
+<div class="gate-overlay" id="gateOverlay">
+  <div class="gate-box">
+    <button class="gate-close" id="gateClose" type="button" aria-label="Fechar">✕</button>
+    <div class="kicker">Episódio 1 · O Notebook</div>
+    <h3 id="gateTitle">Para onde enviamos o seu acesso?</h3>
+    <p>Informe seu e-mail para liberar o Episódio 1 agora. É grátis, leva 10 segundos e você pode cancelar o recebimento quando quiser.</p>
+    <form class="formbox" id="gateForm" novalidate>
+      <input id="gateName" name="nome" type="text" placeholder="Seu nome" autocomplete="name" required>
+      <input id="gateEmail" name="email" type="email" placeholder="Seu melhor e-mail" autocomplete="email" required>
+      <!-- honeypot anti-spam: invisível para pessoas, atrativo para bots -->
+      <input id="gateWebsite" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+      <button class="btn btn-primary" id="gateBtn" type="submit">LIBERAR EPISÓDIO 1 →</button>
+    </form>
+    <label class="consent">
+      <input id="gateConsent" type="checkbox" required>
+      <span>Autorizo o armazenamento do meu nome e e-mail e o envio de comunicações sobre a série
+      "O Código do Silêncio", conforme a
+      <a href="https://efecincobook-hash.github.io/livro-o-codigo-do-silencio/politica-de-privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
+    </label>
+    <div class="formmsg" id="gateMsg" role="status" aria-live="polite"></div>
+  </div>
+</div>
+
+<script>
+/* ================================
+   Mesmo backend de captura do index.html original:
+   Google Apps Script -> Google Sheets.
+   Copiei os mesmos valores de GOOGLE_SCRIPT_URL e LEAD_TOKEN
+   do seu site para que os leads caiam na MESMA planilha.
+   Se você já usa uma aba/planilha separada para tráfego pago,
+   troque esses dois valores pelos correspondentes.
+================================ */
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwIpD7Sz1WKTmxFLFW9ui1ZkE0Qcgrf7lL-P-hbuJZnO_bO4ASPh-x78bWRuJHJiSV-/exec";
+const LEAD_TOKEN = "1a2c40ff7b88353fbcc01b6334a91554d57b47e8";
+const DRIVE_URL  = "https://drive.google.com/file/d/1aYkTmWwyKVuAYKzPd36PtMZ0-KGfe0SF/view?usp=sharing";
+const THANKS_URL = "https://efecincobook-hash.github.io/livro-o-codigo-do-silencio/obrigado.html";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+const gateOverlay = document.getElementById("gateOverlay");
+const gateForm    = document.getElementById("gateForm");
+const gateMsg     = document.getElementById("gateMsg");
+const gateBtn     = document.getElementById("gateBtn");
+const gateClose   = document.getElementById("gateClose");
+
+function openGate(){
+  gateOverlay.classList.add("open");
+  document.body.classList.add("gate-lock");
+  gateMsg.textContent = "";
+  gateMsg.classList.remove("err");
+  setTimeout(()=>document.getElementById("gateName").focus(), 50);
+  if (typeof fbq === 'function') fbq('track', 'InitiateCheckout'); // sinal de intenção, antes do Lead
+}
+function closeGate(){
+  gateOverlay.classList.remove("open");
+  document.body.classList.remove("gate-lock");
+}
+
+document.querySelectorAll(".js-gate").forEach(el=>{
+  el.addEventListener("click", function(e){ e.preventDefault(); openGate(); });
+});
+gateClose.addEventListener("click", closeGate);
+gateOverlay.addEventListener("click", function(e){ if(e.target === gateOverlay) closeGate(); });
+document.addEventListener("keydown", function(e){ if(e.key === "Escape" && gateOverlay.classList.contains("open")) closeGate(); });
+
+function setGateMsg(text, isError){
+  gateMsg.textContent = text;
+  gateMsg.classList.toggle("err", !!isError);
+}
+
+gateForm.addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const nome    = document.getElementById("gateName").value.trim();
+  const email   = document.getElementById("gateEmail").value.trim();
+  const consent = document.getElementById("gateConsent").checked;
+  const website = document.getElementById("gateWebsite").value;
+
+  if(!nome){                 setGateMsg("Informe seu nome.", true); return; }
+  if(!EMAIL_RE.test(email)){ setGateMsg("Informe um e-mail válido.", true); return; }
+  if(!consent){              setGateMsg("É necessário aceitar a Política de Privacidade.", true); return; }
+  if(website){               return; }  // bot: descarta em silêncio
+
+  const qs = new URLSearchParams(location.search);
+  const dados = new URLSearchParams({
+    token:         LEAD_TOKEN,
+    nome:          nome,
+    email:         email,
+    website:       website,
+    consentimento: "true",
+    origem:        location.href + " | landing-ads-episodio-1",
+    utm_source:    qs.get("utm_source")   || "instagram",
+    utm_medium:    qs.get("utm_medium")   || "paid",
+    utm_campaign:  qs.get("utm_campaign") || "episodio1-gratis",
+    user_agent:    navigator.userAgent
+  });
+
+  gateBtn.disabled = true;
+  setGateMsg("Enviando...", false);
+
+  function goToThanks(){
+    if (typeof fbq === 'function') fbq('track', 'Lead');
+    try{
+      sessionStorage.setItem("ocs_drive_url", DRIVE_URL);
+      sessionStorage.setItem("ocs_nome", nome);
+    }catch(err){ /* sessionStorage indisponível: segue sem personalização */ }
+    location.href = THANKS_URL + "?d=" + encodeURIComponent(DRIVE_URL);
+  }
+
+  try{
+    const resp = await fetch(GOOGLE_SCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: dados.toString(),
+      redirect: "follow"
+    });
+    const out = await resp.json();
+    if(out.status !== "ok") throw new Error(out.message || "falha");
+    goToThanks();
+  }catch(err){
+    try{
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: dados.toString()
+      });
+      goToThanks();
+    }catch(err2){
+      setGateMsg("Não foi possível enviar agora. Tente novamente em instantes.", true);
+      gateBtn.disabled = false;
+    }
+  }
+});
+</script>
+
+</body>
+</html>
