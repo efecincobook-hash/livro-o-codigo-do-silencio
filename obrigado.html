@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Acesso liberado — O Código do Silêncio</title>
+<style>
+:root{
+  --bg:#05070a;--panel:#0b1015;--text:#eef3f5;--muted:#91a0aa;
+  --green:#58f39b;--line:rgba(88,243,155,.18);--max:680px;--shadow:0 20px 70px rgba(0,0,0,.45)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:radial-gradient(circle at 80% 10%,rgba(26,111,75,.14),transparent 28rem),
+  radial-gradient(circle at 10% 35%,rgba(30,68,110,.14),transparent 30rem),var(--bg);
+  color:var(--text);line-height:1.65;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+a{color:inherit}
+.container{width:min(100%,var(--max))}
+.card{background:linear-gradient(160deg,#0b1015,#0e151c);border:1px solid var(--line);border-radius:18px;padding:48px 40px;box-shadow:var(--shadow);text-align:center}
+.check{width:58px;height:58px;border-radius:50%;background:rgba(88,243,155,.12);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:1.6rem;color:var(--green)}
+.kicker{color:var(--green);font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:14px}
+p{color:var(--muted);font-size:1rem;margin-bottom:8px}
+.name{color:var(--text);font-weight:700}
+.btn{display:inline-block;margin-top:26px;padding:16px 30px;border-radius:10px;font-weight:800;font-size:.92rem;text-decoration:none;letter-spacing:.02em}
+.btn-primary{background:var(--green);color:#031009;box-shadow:0 0 35px rgba(88,243,155,.14)}
+.btn-primary:hover{transform:translateY(-2px)}
+.note{margin-top:18px;font-size:.82rem;color:#647178}
+.divider{height:1px;background:rgba(255,255,255,.08);margin:34px 0}
+.upsell{text-align:left}
+.upsell .kicker{margin-bottom:8px}
+.upsell h2{font-size:1.15rem;margin-bottom:8px}
+.upsell p{font-size:.9rem;margin-bottom:16px}
+.upsell a{color:var(--green);font-weight:700;font-size:.88rem;text-decoration:underline}
+.back{display:block;margin-top:30px;font-size:.82rem;color:#8b98a0;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="card">
+    <div class="check">✓</div>
+    <div class="kicker">Acesso liberado</div>
+    <h1 id="title">Seu Episódio 1 está pronto.</h1>
+    <p>Confirmamos seu cadastro <span id="nomeSpan"></span>. Clique no botão abaixo para abrir "O Notebook" — o primeiro arquivo do caso.</p>
+    <p>O arquivo abre no Google Drive. Se ele abrir apenas em modo de visualização, use o ícone de download no canto superior direito da página do Drive para salvar sua cópia.</p>
+    <a class="btn btn-primary" id="downloadBtn" href="https://drive.google.com/file/d/1aYkTmWwyKVuAYKzPd36PtMZ0-KGfe0SF/view?usp=sharing" target="_blank" rel="noopener">ABRIR EPISÓDIO 1 →</a>
+    <div class="note">Fique de olho na sua caixa de entrada (e no spam) — também te avisaremos por lá quando houver promoções dos próximos episódios.</div>
+
+    <div class="divider"></div>
+
+    <div class="upsell">
+      <div class="kicker">Depois de ler</div>
+      <h2>Os episódios 2 a 8 já estão prontos.</h2>
+      <p>Quando terminar "O Notebook", o pacote completo (7 episódios restantes) sai por R$67,00 — com 46% de desconto em relação a comprar avulso.</p>
+      <a href="index.html#comprar">Ver o pacote completo →</a>
+    </div>
+
+    <a class="back" href="index.html">← Voltar para a página inicial</a>
+  </div>
+</div>
+
+<script>
+try{
+  const params = new URLSearchParams(location.search);
+  const driveUrl = params.get("d") || sessionStorage.getItem("ocs_drive_url");
+  if(driveUrl){ document.getElementById("downloadBtn").href = driveUrl; }
+
+  const nome = sessionStorage.getItem("ocs_nome");
+  if(nome){
+    document.getElementById("nomeSpan").textContent = ", " + nome;
+    document.getElementById("title").textContent = "Seu Episódio 1 está pronto, " + nome.split(" ")[0] + ".";
+  }
+}catch(err){ /* sessionStorage indisponível: segue com o texto padrão */ }
+</script>
+</body>
+</html>
