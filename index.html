@@ -496,6 +496,7 @@ form.addEventListener("submit", async function(e){
     form.reset();
     document.getElementById("consent").checked = false;
   }catch(err){
+    console.error("[leadForm] Falha no envio principal (verifique deploy/token do Apps Script):", err);
     /* Plano B: envio sem leitura de resposta (opaco), caso o CORS falhe. */
     try{
       await fetch(GOOGLE_SCRIPT_URL, {
@@ -598,6 +599,7 @@ gateForm.addEventListener("submit", async function(e){
     if(out.status !== "ok") throw new Error(out.message || "falha");
     goToThanks();
   }catch(err){
+    console.error("[gateForm] Falha no envio principal (verifique deploy/token do Apps Script):", err);
     /* Plano B: envio sem leitura de resposta (opaco), caso o CORS falhe. */
     try{
       await fetch(GOOGLE_SCRIPT_URL, {
