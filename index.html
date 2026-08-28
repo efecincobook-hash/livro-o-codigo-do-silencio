@@ -101,7 +101,7 @@ section{padding:105px 0}.section-head{max-width:760px;margin-bottom:48px}.kicker
 .trustrow{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin-top:26px;color:#9aa7ad;font-size:.8rem}
 .trustrow span{display:flex;align-items:center;gap:7px}.trustrow span:before{content:"✓";color:var(--green);font-weight:800}
 .formbox{margin-top:25px;display:flex;gap:10px;max-width:620px}.formbox input{flex:1;background:#080d11;border:1px solid rgba(255,255,255,.12);color:#fff;border-radius:8px;padding:14px}.formbox input:focus{outline:1px solid var(--green);border-color:var(--green)}.formmsg{font-size:.78rem;color:var(--green);margin-top:10px;min-height:20px}.formmsg.err{color:var(--red)}
-.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.hp{display:none!important}
 .consent{display:flex;gap:9px;align-items:flex-start;max-width:620px;margin-top:14px;color:#8d9aa2;font-size:.78rem;line-height:1.5;cursor:pointer}
 .consent input{accent-color:var(--green);margin-top:3px;flex:none}.consent a{color:var(--green);text-decoration:underline}
 .gate-overlay{display:none;position:fixed;inset:0;z-index:200;align-items:center;justify-content:center;padding:20px;background:rgba(3,5,7,.82);backdrop-filter:blur(6px)}
@@ -372,7 +372,7 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:45px 0;color:#6f7c83;f
     <input id="name" name="nome" type="text" placeholder="Seu nome" autocomplete="name" required>
     <input id="email" name="email" type="email" placeholder="Seu melhor e-mail" autocomplete="email" required>
     <!-- honeypot anti-spam: invisível para pessoas, atrativo para bots -->
-    <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+    <input id="hpField" name="hp_confirmacao" type="text" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" aria-hidden="true" class="hp">
     <button class="btn btn-primary" id="leadBtn" type="submit">QUERO RECEBER</button>
   </form>
   <label class="consent reveal">
@@ -413,7 +413,7 @@ footer{border-top:1px solid rgba(255,255,255,.07);padding:45px 0;color:#6f7c83;f
       <input id="gateName" name="nome" type="text" placeholder="Seu nome" autocomplete="name" required>
       <input id="gateEmail" name="email" type="email" placeholder="Seu melhor e-mail" autocomplete="email" required>
       <!-- honeypot anti-spam: invisível para pessoas, atrativo para bots -->
-      <input id="gateWebsite" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+      <input id="gateHpField" name="hp_confirmacao" type="text" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" aria-hidden="true" class="hp">
       <button class="btn btn-primary" id="gateBtn" type="submit">LIBERAR EPISÓDIO 1 →</button>
     </form>
     <label class="consent">
@@ -456,7 +456,7 @@ form.addEventListener("submit", async function(e){
   const nome    = document.getElementById("name").value.trim();
   const email   = document.getElementById("email").value.trim();
   const consent = document.getElementById("consent").checked;
-  const website = document.getElementById("website").value;
+  const website = document.getElementById("hpField").value;
 
   if(!nome){                 setMsg("Informe seu nome.", true); return; }
   if(!EMAIL_RE.test(email)){ setMsg("Informe um e-mail válido.", true); return; }
@@ -555,7 +555,7 @@ gateForm.addEventListener("submit", async function(e){
   const nome    = document.getElementById("gateName").value.trim();
   const email   = document.getElementById("gateEmail").value.trim();
   const consent = document.getElementById("gateConsent").checked;
-  const website = document.getElementById("gateWebsite").value;
+  const website = document.getElementById("gateHpField").value;
 
   if(!nome){                 setGateMsg("Informe seu nome.", true); return; }
   if(!EMAIL_RE.test(email)){ setGateMsg("Informe um e-mail válido.", true); return; }
