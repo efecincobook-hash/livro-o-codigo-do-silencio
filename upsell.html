@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Oferta única — O Código do Silêncio</title>
+<style>
+:root{
+  --bg:#05070a;--panel:#0b1015;--text:#eef3f5;--muted:#91a0aa;
+  --green:#58f39b;--line:rgba(88,243,155,.18);--red:#ff5d69;
+  --max:760px;--shadow:0 20px 70px rgba(0,0,0,.45)
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:radial-gradient(circle at 80% 10%,rgba(26,111,75,.14),transparent 28rem),
+  radial-gradient(circle at 10% 35%,rgba(30,68,110,.14),transparent 30rem),var(--bg);
+  color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+a{color:inherit}
+.container{width:min(calc(100% - 40px),var(--max));margin:auto}
+
+/* Faixa de confirmação */
+.approved{border-bottom:1px solid rgba(255,255,255,.07);background:rgba(88,243,155,.05)}
+.approved .container{display:flex;align-items:center;gap:12px;padding:14px 0;font-size:.86rem;color:#c3cdd1}
+.approved .ok{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(88,243,155,.14);border:1px solid var(--line);color:var(--green);font-weight:800;font-size:.8rem}
+
+/* Topo */
+header{padding:64px 0 34px}
+.kicker{color:var(--green);font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+h1{font-size:clamp(2rem,5.4vw,3.3rem);line-height:1.04;letter-spacing:-.045em;max-width:680px}
+.lead{color:#aeb9bf;font-size:1.08rem;margin-top:22px;max-width:640px}
+
+/* Terminal com os arquivos bloqueados */
+.terminal{background:#070b0e;border:1px solid rgba(255,255,255,.1);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;margin-top:8px}
+.termbar{display:flex;align-items:center;gap:7px;padding:13px 16px;background:#0d1317;border-bottom:1px solid rgba(255,255,255,.06)}
+.termbar i{width:9px;height:9px;border-radius:50%;background:#44515a}
+.term-title{margin-left:8px;color:#69777f;font:12px ui-monospace,SFMono-Regular,Menlo,monospace}
+.term-body{padding:22px 24px;font:13.5px/1.9 ui-monospace,SFMono-Regular,Menlo,monospace;color:#9eb0b8;overflow-x:auto}
+.term-body .g{color:var(--green)}.term-body .dim{color:#65747d}.term-body .r{color:#ff7c86}.term-body .w{color:#e9eff1}
+.files{list-style:none;margin:10px 0}
+.files li{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:7px 0;border-top:1px dashed rgba(255,255,255,.06)}
+.files li:first-child{border-top:0}
+.files .lock{color:#ff7c86}
+.files b{color:#e9eff1;font-weight:600}
+.files small{display:block;color:#7f8e96;font-family:Inter,system-ui,sans-serif;font-size:.84rem;line-height:1.45}
+.cursor{display:inline-block;width:8px;height:15px;background:var(--green);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+
+/* Oferta */
+.offer{margin:44px 0 0;border:1px solid var(--green);border-radius:18px;padding:36px;
+  background:linear-gradient(145deg,#0c1712,#0a0f12);box-shadow:0 0 45px rgba(88,243,155,.14)}
+.offer h2{font-size:1.45rem;letter-spacing:-.02em;line-height:1.2}
+.offer .sub{color:var(--muted);font-size:.95rem;margin-top:8px}
+.pricing{display:flex;align-items:flex-end;gap:18px;flex-wrap:wrap;margin:26px 0 6px}
+.strike{color:#647178;text-decoration:line-through;font-size:1rem}
+.price{font-size:2.9rem;font-weight:900;letter-spacing:-.03em;line-height:1}
+.save{color:var(--green);font-weight:800;font-size:.86rem}
+.includes{list-style:none;margin:22px 0 4px;color:#b4c0c5;font-size:.92rem}
+.includes li{margin:9px 0;padding-left:22px;position:relative}
+.includes li:before{content:"✓";color:var(--green);position:absolute;left:0;font-weight:800}
+
+/* Espaço do botão da Kiwify.
+   Enquanto o código não for colado, aparece um aviso tracejado.
+   Assim que você colar o código dentro da div, o aviso some sozinho. */
+.kiwify-slot{margin-top:26px;text-align:center}
+.kiwify-slot:empty{border:1px dashed var(--red);border-radius:10px;padding:18px;color:#ff9aa2;font-size:.85rem}
+.kiwify-slot:empty::before{content:"Cole aqui o código do botão gerado na Kiwify."}
+.kiwify-slot button{max-width:100%;white-space:normal}
+.kiwify-slot a,.kiwify-slot [id^="kiwify-upsell-cancel"]{color:#8b98a0!important;font-size:.85rem}
+
+.direct-buy{display:none;margin-top:26px;text-align:center}
+.direct-buy a{display:inline-block;background:var(--green);color:#031009;font-weight:800;font-size:.95rem;padding:16px 28px;border-radius:10px;text-decoration:none}
+.direct-buy p{margin-top:10px;color:#7e8b92;font-size:.8rem}
+.no-session .kiwify-slot,.no-session .onetime{display:none}
+.no-session .direct-buy{display:block}
+.onetime{margin-top:16px;text-align:center;color:#7e8b92;font-size:.8rem}
+
+/* Bloco final */
+.closing{padding:60px 0 80px}
+.closing blockquote{border-left:2px solid var(--green);padding-left:18px;color:#dfe7ea;font-size:1.1rem;line-height:1.6;max-width:600px}
+.closing p{color:var(--muted);margin-top:22px;max-width:620px}
+
+footer{border-top:1px solid rgba(255,255,255,.07);padding:30px 0;color:#6f7c83;font-size:.78rem}
+footer a{text-decoration:underline}
+
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}}
+@media(max-width:560px){
+  .container{width:min(calc(100% - 28px),var(--max))}
+  header{padding:44px 0 26px}
+  .offer{padding:26px 20px}
+  .price{font-size:2.4rem}
+  .term-body{font-size:12px;padding:18px}
+}
+</style>
+<script>
+/* A Kiwify chega a esta página com parâmetros na URL após uma compra aprovada.
+   Sem nenhum parâmetro, o visitante abriu a página direto: mostra o checkout normal. */
+if(!location.search){ document.documentElement.classList.add("no-session"); }
+</script>
+</head>
+<body>
+
+<div class="approved">
+  <div class="container">
+    <span class="ok" aria-hidden="true">✓</span>
+    <span>Pagamento aprovado. O acesso ao Episódio 1 já foi enviado para o seu e-mail.</span>
+  </div>
+</div>
+
+<header class="container">
+  <div class="kicker">Antes de abrir o notebook</div>
+  <h1>O caso não termina no Episódio 1. Ele só começa ali.</h1>
+  <p class="lead">O programador deixou mais sete arquivos para trás. Cada um abre uma porta que o anterior apenas apontou: um cofre, uma sala sem identificação, um acordo que ninguém admite ter assinado. Esta é a única vez em que você pode destravar todos de uma vez, pelo menor preço.</p>
+</header>
+
+<main class="container">
+
+  <div class="terminal" role="img" aria-label="Terminal listando os episódios 2 a 8, todos bloqueados">
+    <div class="termbar"><i></i><i></i><i></i><span class="term-title">investigacao — acesso</span></div>
+    <div class="term-body">
+      <div><span class="g">$</span> <span class="w">ls arquivos-restantes/</span></div>
+      <ul class="files">
+        <li><span class="lock">[bloqueado]</span><div><b>02 — O Cofre</b><small>Uma senha. Um cofre. Uma testemunha mente.</small></div></li>
+        <li><span class="lock">[bloqueado]</span><div><b>03 — A Organização</b><small>Três registros. Um deles chega quebrado.</small></div></li>
+        <li><span class="lock">[bloqueado]</span><div><b>04 — A Sala dos Espelhos</b><small>Nesta sala, ninguém é o que parece.</small></div></li>
+        <li><span class="lock">[bloqueado]</span><div><b>05 — O Pacto</b><small>Um acordo que obriga todos a se calar.</small></div></li>
+        <li><span class="lock">[bloqueado]</span><div><b>06 — A Queda do Sistema</b><small>O sistema caiu. Alguém sabe que você entrou.</small></div></li>
+        <li><span class="lock">[bloqueado]</span><div><b>07 — O Arquivo-Cofre</b><small>Quatro fragmentos. Uma chave. Um cofre.</small></div></li>
+        <li><span class="lock">[bloqueado]</span><div><b>08 — A Revelação</b><small>Três finais. Seu código decide qual é o seu.</small></div></li>
+      </ul>
+      <div><span class="dim">7 arquivos encontrados. Autorização necessária.</span> <span class="cursor" aria-hidden="true"></span></div>
+    </div>
+  </div>
+
+  <section class="offer" aria-labelledby="oferta-titulo">
+    <h2 id="oferta-titulo">Episódios 2 a 8, liberados agora</h2>
+    <p class="sub">A continuação direta do Episódio 1, até o último dos três finais.</p>
+
+    <div class="pricing">
+      <div>
+        <div class="strike">R$ 125,30 comprando avulso</div>
+        <div class="price">R$ 67,00</div>
+      </div>
+      <div class="save">Você economiza R$ 58,30 (46%)</div>
+    </div>
+
+    <ul class="includes">
+      <li>Os 7 episódios restantes, liberados assim que você confirmar</li>
+      <li>Encapsulamento, herança, polimorfismo, interfaces, exceções e coleções em Java</li>
+      <li>Decisões tomadas pelo seu próprio código até o desfecho</li>
+      <li>Acesso vitalício, para voltar e descobrir os outros finais</li>
+      <li>Sem digitar o cartão de novo: a compra é confirmada em um clique</li>
+    </ul>
+
+    <!-- Botão de upsell da Kiwify: produto "Pacote Completo — Episódios 2 a 8" (fh4CGo1) -->
+    <div class="kiwify-slot"><div id="kiwify-upsell-fh4CGo1" data-upsell-url="" data-downsell-url="" style="--kiwify-upsell-accept-bg:#58f39b;--kiwify-upsell-accept-color:#031009">
+          <button id="kiwify-upsell-trigger-fh4CGo1">Sim, quero os episódios 2 a 8</button>
+          <div id="kiwify-upsell-cancel-trigger-fh4CGo1">Não, vou seguir só com o Episódio 1</div>
+        </div><script src="https://snippets.kiwify.com/upsell-v2/upsell.min.js"></script></div>
+
+    <!-- Mostrado só para quem abrir esta página diretamente, sem vir de uma compra na Kiwify -->
+    <div class="direct-buy">
+      <a href="https://pay.kiwify.com.br/fh4CGo1">Comprar os episódios 2 a 8</a>
+      <p>Você vai para o checkout seguro da Kiwify.</p>
+    </div>
+
+    <p class="onetime">Esta oferta aparece só agora, logo após a compra do Episódio 1.</p>
+  </section>
+
+  <section class="closing">
+    <blockquote>"Você chegou. Agora veja tudo. E entenda: o silêncio nunca foi ausência. Foi espera."</blockquote>
+    <p>Se preferir, você pode recusar e seguir só com o Episódio 1. Ele continua seu, e os outros episódios seguem disponíveis avulsos, a R$ 17,90 cada.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <strong style="color:#b9c4c9">O Código do Silêncio</strong> © 2026 · Pagamento processado pela Kiwify ·
+    <a href="politica-de-privacidade.html">Política de Privacidade</a>
+  </div>
+</footer>
+
+</body>
+</html>
